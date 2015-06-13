@@ -107,10 +107,23 @@ describe('meetings', function(){
         });
       })
 
-      it('should have an instance of the meeting', function(done){
+      it('should render 200', function(done){
         Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
           if (err){ throw err }
           request.get('http://127.0.0.1:3001/meetings/'+meeting._id).end(function(err, res){
+            if (err){ throw err }
+            assert.equal(res.statusCode, 200)
+            done()
+          })
+        })
+      })
+    })
+
+    describe('GET /:id/edit', function(done){
+      it('should render 200', function(done){
+        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
+          if (err){ throw err }
+          request.get('http://127.0.0.1:3001/meetings/'+meeting._id+'/edit').end(function(err, res){
             if (err){ throw err }
             assert.equal(res.statusCode, 200)
             done()
