@@ -12,11 +12,11 @@ exports.index = function(req, res, next) {
 };
 
 exports.new = function(req, res, next) {
-  res.render('meetings/form', {});
+  res.render('meetings/new', {});
 };
 
 exports.create = function(req, res) {
-  var meeting = new Meeting({  
+  var meeting = new Meeting({
     title: req.body.title,
     from: req.body.from,
     to: req.body.to,
@@ -55,7 +55,7 @@ exports.update = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      meeting.update({  
+      meeting.update({
         title: req.body.title,
         from: req.body.from,
         to: req.body.to,

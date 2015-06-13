@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Language" content="en"></head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script type="text/javascript">
+    appModule.config(function($interpolateProvider) {
+      $interpolateProvider.startSymbol('{!{'); // remove conflict between ng and hbs
+    });
+  </script>
 <body>
   {{{ body }}}
 </body>
