@@ -108,10 +108,13 @@ describe('meetings', function(){
       })
 
       it('should have an instance of the meeting', function(done){
-        Meeting.find(function(err, meetings){
+        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
           if (err){ throw err }
-          assert.equal(meetings.length, 1)
-          done()
+          request.get('http://127.0.0.1:3001/meetings/'+meeting._id).end(function(err, res){
+            if (err){ throw err }
+            assert.equal(res.statusCode, 200)
+            done()
+          })
         })
       })
     })
