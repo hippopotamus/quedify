@@ -35,10 +35,9 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res, next){
-  var collection = db.get('meetingcollection');
 
-  collection.find({"_id": req.params.id}, function(err, doc){
-    if (err){ res.send("There was a problem getting the information from the database."); }
+  Meeting.findOne({"_id": req.params.id}, function(err, doc){
+    if (err){ res.status(404).send("404 doesn't exist"); }
     else{
       res.render('meetings/show', {"meeting": doc})
     }
