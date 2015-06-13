@@ -7,8 +7,16 @@ var bodyParser = require('body-parser');
 
 // init mongo
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/nodetest');
+var mongoose = require('mongoose');
+
+var connect = function () {
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  mongoose.connect('localhost:27017/nodetest', options);
+};
+connect();
+
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -29,11 +37,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function(req, res, next){
-  req.db = db;
-  next();
-})
 
 app.use('/', routes);
 app.use('/users', users);

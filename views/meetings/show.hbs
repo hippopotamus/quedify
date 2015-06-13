@@ -1,0 +1,8 @@
+<h4>{{meeting.title}}</h4>
+<p>from: {{meeting.from}}</p>
+<p>to: {{meeting.to}}</p>
+<p>location: {{meeting.location}}</p>
+<p>description: {{meeting.description}}</p>
+{{#each meeting.participants}}
+  {{this}}
+{{/each}}
