@@ -59,7 +59,7 @@ describe('meetings', function(){
       })
     })
 
-    describe('GET /meetings', function(){
+    describe('GET /', function(){
       it('should return a status code of 200', function(done){
         request.get('http://127.0.0.1:3001/meetings').end(function(err, res){
           if (err){ throw err; }
@@ -69,7 +69,7 @@ describe('meetings', function(){
       });
     })
 
-    describe('POST /meetings', function(){
+    describe('POST /', function(){
       it('should return a status code of 200', function(done){
         request.post('http://127.0.0.1:3001/meetings').send({
           title: "tea with teddy bear",
@@ -84,6 +84,28 @@ describe('meetings', function(){
           done();
         });
       });
+
+      it('should have an instance of the meeting', function(done){
+        Meeting.find(function(err, meetings){
+          if (err){ throw err }
+          assert.equal(meetings.length, 1)
+          done()
+        })
+      })
+    })
+
+    describe('GET /:id', function(done){
+      it('should render 404 on bad id', function(done){
+        request.get('http://127.0.0.1:3001/meetings/lolsup').end(function(err, res){
+          if (err){
+            assert.equal(res.statusCode, 404);
+            done();
+          }
+          else{
+            throw err;
+          }
+        });
+      })
 
       it('should have an instance of the meeting', function(done){
         Meeting.find(function(err, meetings){
