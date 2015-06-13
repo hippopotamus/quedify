@@ -72,18 +72,26 @@ describe('meetings', function(){
     describe('POST /meetings', function(){
       it('should return a status code of 200', function(done){
         request.post('http://127.0.0.1:3001/meetings').send({
-          title: "visiting mom",
-          from: "2015-04-25",
-          to: "2015-04-27",
+          title: "tea with teddy bear",
+          from: "2015-04-28",
+          to: "2015-04-29",
           location: "mom's house",
-          description: "visiting momma!",
-          participants: "mom, me, poppa"
+          description: "TEA TIME",
+          participants: "mom, teddy bear"
         }).end(function(err, res){
           if (err){ throw err; }
           assert.equal(res.statusCode, 200);
           done();
         });
       });
+
+      it('should have an instance of the meeting', function(done){
+        Meeting.find(function(err, meetings){
+          if (err){ throw err }
+          assert.equal(meetings.length, 1)
+          done()
+        })
+      })
     })
   });
 });
