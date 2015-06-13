@@ -2,6 +2,7 @@ var assert = require('assert');
 var http = require('http');
 var app = require('../app.js');
 var server = http.createServer(app);
+var request = require('superagent')
 
 var Meeting = require('../app/models/meeting.js')
 
@@ -41,7 +42,7 @@ describe('meetings', function(){
     })
   })
 
-  describe('GET /meetings', function(){
+  describe('/meetings', function(){
     before(function(){
       server.listen(3001)
     });
@@ -58,11 +59,31 @@ describe('meetings', function(){
         done()
       })
     })
-    it('should return a status code of 200', function(done){
-      http.get('http://127.0.0.1:3001/meetings', function(res){
-        assert.equal(res.statusCode, 200);
-        done();
+
+    describe('GET /meetings', function(){
+      it('should return a status code of 200', function(done){
+        http.get('http://127.0.0.1:3001/meetings', function(res){
+          assert.equal(res.statusCode, 200);
+          done();
+        });
       });
-    });
+    })
+
+    describe('POST /meetings', function(){
+      it('should return a status code of 200', function(done){
+        request.post('http://127.0.0.1:3001/meetings').send({
+          title: "visiting mom",
+          from: "2015-04-25",
+          to: "2015-04-27",
+          location: "mom's house",
+          description: "visiting momma!",
+          participants: "mom, me, poppa"
+        }).end(function(err, res){
+          if (err){ throw err; }
+          assert.equal(res.statusCode, 200);
+          done();
+        });
+      });
+    })
   });
 });
