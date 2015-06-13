@@ -178,5 +178,39 @@ describe('meetings', function(){
         })
       })
     })
+
+    describe('DELETE /:id', function(){
+      it('should render 404 on bad id', function(done){
+        request.del('http://127.0.0.1:3001/meetings/lolsup').end(function(err, res){
+          if (err){
+            assert.equal(res.statusCode, 404);
+            done();
+          }
+          else{
+            throw err;
+          }
+        });
+      })
+
+      it('should render 200', function(done){
+        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+          if (err){ throw err; }
+          request.del('http://127.0.0.1:3001/meetings/'+meeting._id).end(function(err, res){
+            if (err){ throw err; }
+            assert.equal(res.statusCode, 200);
+            done();
+          });
+        })
+      })
+
+      it('should have deleted the meeting', function(done){
+        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+          if (err){ throw err; }
+          assert.equal(meeting, null)
+          done()
+        })
+
+      })
+    })
   });
 });
