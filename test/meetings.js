@@ -62,7 +62,8 @@ describe('meetings', function(){
 
     describe('GET /meetings', function(){
       it('should return a status code of 200', function(done){
-        http.get('http://127.0.0.1:3001/meetings', function(res){
+        request.get('http://127.0.0.1:3001/meetings').end(function(err, res){
+          if (err){ throw err; }
           assert.equal(res.statusCode, 200);
           done();
         });
