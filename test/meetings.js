@@ -131,5 +131,52 @@ describe('meetings', function(){
         })
       })
     })
+
+    describe('PUT /:id', function(done){
+      it('should render 404 on bad id', function(done){
+        request.put('http://127.0.0.1:3001/meetings/lolsup').send({
+          title: "SHOULDNT WORK",
+          from: "2015-04-28",
+          to: "2015-04-29",
+          location: "mom's house",
+          description: "TEA TIME",
+          participants: "mom, teddy bear"
+        }).end(function(err, res){
+          if (err){
+            assert.equal(res.statusCode, 404);
+            done();
+          }
+          else{
+            throw err;
+          }
+        });
+      })
+
+      it('should render 200', function(done){
+        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
+          if (err){ throw err }
+          request.put('http://127.0.0.1:3001/meetings/'+meeting._id).send({
+          title: "tea with friends",
+          from: "2015-04-28",
+          to: "2015-04-29",
+          location: "mom's house",
+          description: "TEA TIME",
+          participants: "mom, teddy bear"
+        }).end(function(err, res){
+            if (err){ throw err }
+            assert.equal(res.statusCode, 200)
+            done()
+          })
+        })
+      })
+
+      it('should have updated the meeting', function(done){
+        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+          if (err){ throw err; }
+          assert.equal(meeting.location, "mom's house")
+          done()
+        })
+      })
+    })
   });
 });
