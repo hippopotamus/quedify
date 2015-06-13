@@ -1,0 +1,16 @@
+<h1>Meetings list</h1>
+
+<ul>
+  {{#each collection}}
+    <li>
+    <h4>{{this.title}}</h4>
+    <p>from: {{this.from}}</p>
+    <p>to: {{this.to}}</p>
+    <p>location: {{this.location}}</p>
+    <p>description: {{this.description}}</p>
+    {{#each this.participants}}
+      {{this}}
+    {{/each}}
+    </li>
+  {{/each}}
+</ul>
