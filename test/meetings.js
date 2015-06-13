@@ -209,7 +209,6 @@ describe('meetings', function(){
           assert.equal(meeting, null)
           done()
         })
-
       })
     })
   });
