@@ -6,3 +6,7 @@
 {{#each meeting.participants}}
   {{this}}
 {{/each}}
+<form action="/meetings/{{meeting.id}}" method="POST">
+  <input type="hidden" name="_method" value="put">
+  <button type="submit">edit</button>
+</form>

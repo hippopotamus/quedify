@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('meetings/new', {});
+  res.render('meetings/form', {});
 });
 
 router.post('/', function(req, res) {
@@ -34,12 +34,20 @@ router.post('/', function(req, res) {
   });
 });
 
-router.get('/:id', function(req, res, next){
-
+router.get('/:id', function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, doc){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
       res.render('meetings/show', {"meeting": doc})
+    }
+  })
+})
+
+router.put('/:id', function(req, res){
+  Meeting.findOne({"_id": req.params.id}, function(err, doc){
+    if (err){ res.status(404).send("404 doesn't exist"); }
+    else{
+      res.render('meetings/form', {"meeting": doc})
     }
   })
 })
