@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="meetingsApp">
 <head>
   <title>{{title}}</title>
   <meta charset="UTF-8">
@@ -7,12 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Language" content="en"></head>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <script type="text/javascript">
-    appModule.config(function($interpolateProvider) {
-      $interpolateProvider.startSymbol('{!{'); // remove conflict between ng and hbs
-    });
-  </script>
+  <script src="javascripts/meetings.js"></script>
 <body>
-  {{{ body }}}
+  <div ng-controller="MeetingController">
+    {{{ body }}}
+  </div>
 </body>
 </html>

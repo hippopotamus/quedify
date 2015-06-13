@@ -5,14 +5,12 @@ var Meeting = require('../models/meeting.js')
 
 exports.index = function(req, res, next) {
   Meeting.find(function(e, docs){
-      res.render('meetings/index', {
-          "collection" : docs
-      });
+      res.json({"collection" : docs });
   });
 };
 
 exports.new = function(req, res, next) {
-  res.render('meetings/new', {});
+  res.render('meetings/new');
 };
 
 exports.create = function(req, res) {
