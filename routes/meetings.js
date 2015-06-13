@@ -3,13 +3,13 @@ var router = express.Router();
 var mongoose = require('mongoose')
 var Meeting = require('../app/models/meeting.js')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  Meeting.find(function(e, docs){
-      res.render('meetings/index', {
-          "collection" : docs
-      });
-  });
-});
+// router.get('/', function(req, res, next) {
+//   Meeting.find(function(e, docs){
+//       res.render('meetings/index', {
+//           "collection" : docs
+//       });
+//   });
+// });
 
 router.get('/new', function(req, res, next) {
   res.render('meetings/form', {});
