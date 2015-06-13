@@ -33,7 +33,6 @@ describe('meetings', function(){
     it('should save participants as an array', function(done){
       Meeting.findOne({"title": "visiting mom"}, function(err, meeting){
         if (err){ throw err; }
-        // assert.equal(meeting.from, Date("2015-04-25"))
         assert.equal(meeting.participants[0], "mom")
         assert.equal(meeting.participants[1], "me")
         assert.equal(meeting.participants[2], "poppa")
