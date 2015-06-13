@@ -4,6 +4,7 @@ before_script:
   - sudo apt-get update
   - sudo apt-get install -y mongodb-org=3.0.3 mongodb-org-server=3.0.3 mongodb-org-shell=3.0.3 mongodb-org-mongos=3.0.3 mongodb-org-tools=3.0.3
   - sleep 15
+  - mongo --version
 language: node_js
 node_js:
   - "0.12"
