@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var meetings = require('./controllers/meetings.js')
+var meetings = require('../app/controllers/meetings.js')
 
 module.exports = function(app){
   app.get('/meetings', meetings.index)

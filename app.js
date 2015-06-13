@@ -5,14 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-
+var configVars = require('./config/settings.js')
+var configFromEnv = configVars[process.env.NODE_ENV]
 // init mongo
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 var connect = function () {
   var options = { server: { socketOptions: { keepAlive: 1 } } };
-  mongoose.connect('localhost:27017/nodetest', options);
+  mongoose.connect(configFromEnv.dbConnectionString, options);
 };
 connect();
 
@@ -43,6 +44,6 @@ app.use(methodOverride(function (req, res) {
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./app/routes')(app);
+require('./config/routes')(app);
 
 module.exports = app;
