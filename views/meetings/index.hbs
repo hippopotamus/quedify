@@ -4,7 +4,7 @@
   {{#each collection}}
     <li>
     <h4>{{this.title}}</h4>
-    <p>{{_id}}</p>
+    <p><a href="/meetings/{{_id}}">{{_id}}</a></p>
     <p>from: {{this.from}}</p>
     <p>to: {{this.to}}</p>
     <p>location: {{this.location}}</p>

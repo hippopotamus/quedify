@@ -6,7 +6,10 @@
 {{#each meeting.participants}}
   {{this}}
 {{/each}}
+
+<a href="/meetings/{{meeting._id}}/edit"><button>edit</button></a>
+
 <form action="/meetings/{{meeting.id}}" method="POST">
-  <input type="hidden" name="_method" value="put">
-  <button type="submit">edit</button>
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">delete</button>
 </form>

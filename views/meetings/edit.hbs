@@ -1,0 +1,12 @@
+<h1>Add Meeting to Calender</h1>
+
+<form name="editMeeting" action="/meetings/{{meeting._id}}" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  <input type="text" name="title" value="{{meeting.title}}">
+  <input type="text" name="from" value="{{meeting.from}}">
+  <input type="text" name="to" value="{{meeting.to}}">
+  <input type="text" name="location" value="{{meeting.location}}">
+  <input type="text" name="description" value="{{meeting.description}}">
+  <input type="text" name="participants" value="{{meeting.participants}}">
+  <button type="submit">Submit</button>
+</form>

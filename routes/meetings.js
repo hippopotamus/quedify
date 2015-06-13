@@ -25,7 +25,6 @@ router.post('/', function(req, res) {
     participants: req.body.participants
   })
 
-
   meeting.save(function (err, meeting){
     if (err){ res.send("There was a problem adding the information to the database."); }
     else{
@@ -35,21 +34,52 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res){
-  Meeting.findOne({"_id": req.params.id}, function(err, doc){
+  Meeting.findOne({"_id": req.params.id}, function(err, meeting){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      res.render('meetings/show', {"meeting": doc})
+      res.render('meetings/show', {"meeting": meeting})
+    }
+  })
+})
+
+router.get('/:id/edit', function(req, res){
+  Meeting.findOne({"_id": req.params.id}, function(err, meeting){
+    if (err){ res.status(404).send("404 doesn't exist"); }
+    else{
+      res.render('meetings/edit', {"meeting": meeting})
     }
   })
 })
 
 router.put('/:id', function(req, res){
-  Meeting.findOne({"_id": req.params.id}, function(err, doc){
+  Meeting.findOne({"_id": req.params.id}, function(err, meeting){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      res.render('meetings/form', {"meeting": doc})
+      meeting.update({  
+        title: req.body.title,
+        from: req.body.from,
+        to: req.body.to,
+        location: req.body.location,
+        description: req.body.description,
+        participants: req.body.participants
+      }, function (err, meeting){
+        if (err){ res.send("There was a problem saving the information to the database."); }
+        else{
+          res.redirect("/meetings");
+        }
+      })
     }
   })
 })
+
+router.delete('/:id', function(req, res){
+  Meeting.remove({"_id": req.params.id}, function(err, doc){
+    if (err){ res.status(404).send("404 doesn't exist"); }
+    else{
+      res.redirect('/meetings')
+    }
+  })
+})
+
 
 module.exports = router;
