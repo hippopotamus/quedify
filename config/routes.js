@@ -12,7 +12,8 @@ module.exports = function(app){
   app.delete('/meetings/:id', meetings.delete)
 
   app.use(function (req, res, next) {
-    res.status(404).send("404");
+    res.status(404);
+    res.render("404");
   });
 
   // error handlers
