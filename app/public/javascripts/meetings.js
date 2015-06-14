@@ -10,6 +10,7 @@ app.controller('MeetingController', function($scope, $http){
     $('#newMeetingTo').datetimepicker();
     $('#editMeetingFrom').datetimepicker();
     $('#editMeetingTo').datetimepicker();
+    $scope.showNewForm = true
     $scope.getMeetings()
   }
 
@@ -27,12 +28,16 @@ app.controller('MeetingController', function($scope, $http){
   }
 
   $scope.getMeeting = function(id){
-    $http.get('/meetings/'+id).success(function(data){
-      $scope.showMeeting = {"meeting": data} // this is so hacky
+    $http.get('/meetings/'+id).success(function(meeting){
+      $scope.showMeeting = true
+      meeting.from = new Date(meeting.from).toLocaleString();
+      meeting.to = new Date(meeting.to).toLocaleString();
+      meeting.participants = meeting.participants.join(', ');
+      $scope.showMeeting = {"meeting": meeting}; // this is so hacky
     }).error(function(data){
-      console.log("error")
-    })
-  }
+      console.log("error");
+    });
+  };
 
   $scope.createMeeting = function(){
     $http.post('/meetings', $scope.newMeeting).success(function(data){
@@ -44,6 +49,7 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.editMeeting = function(id){
     $http.get('/meetings/'+id+'/edit').success(function(data){
+      $scope.showNewForm = false
       $scope.showEditForm = true
       $scope.editMeeting = data
     }).error(function(data){
@@ -53,6 +59,8 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.updateMeeting = function(){
     $http.put('/meetings/'+$scope.editMeeting._id, $scope.editMeeting).success(function(data){
+      $scope.showNewForm = true
+      $scope.showEditForm = false
       $scope.getMeetings()
       $scope.getMeeting($scope.editMeeting._id)
     }).error(function(data){
@@ -62,6 +70,7 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.deleteMeeting = function(id){
     $http.delete('/meetings/'+id).success(function(data){
+      $scope.showMeeting = false
       $scope.getMeetings()
     }).error(function(data){
       console.log("error")
