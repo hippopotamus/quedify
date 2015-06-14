@@ -5,7 +5,7 @@ var Meeting = require('../models/meeting.js')
 
 exports.index = function(req, res, next) {
   Meeting.find(function(e, docs){
-      res.json(docs);
+    return res.json(docs);
   });
 };
 
@@ -24,34 +24,34 @@ exports.create = function(req, res) {
   })
 
   meeting.save(function (err, meeting){
-    if (err){ res.send("There was a problem adding the information to the database."); }
+    if (err){ return res.send("There was a problem adding the information to the database."); }
     else{
-      res.json({"success": true});
+      return res.json({"success": true});
     }
   });
 };
 
 exports.show = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
-    if (err){ res.status(404).send("404 doesn't exist"); }
+    if (err){ return res.status(404).render("404"); }
     else{
-      res.json(meeting)
+      return res.json(meeting)
     }
   })
 };
 
 exports.edit = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
-    if (err){ res.status(404).send("404 doesn't exist"); }
+    if (err){ return res.status(404).render("404"); }
     else{
-      res.json(meeting)
+      return res.json(meeting)
     }
   })
 };
 
 exports.update = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
-    if (err){ res.status(404).send("404 doesn't exist"); }
+    if (err){ return res.status(404).render("404"); }
     else{
       meeting.update({
         title: req.body.title,
@@ -61,7 +61,7 @@ exports.update = function(req, res){
         description: req.body.description,
         participants: req.body.participants
       }, function (err, meeting){
-        if (err){ res.send("There was a problem saving the information to the database."); }
+        if (err){ return res.status(500).render("error"); }
         else{
           res.json({"success": true});
         }
@@ -72,9 +72,18 @@ exports.update = function(req, res){
 
 exports.delete = function(req, res){
   Meeting.remove({"_id": req.params.id}, function(err, doc){
-    if (err){ res.status(404).send("404 doesn't exist"); }
+    if (err){ return res.status(404).render("404"); }
     else{
       res.json({"success": true})
     }
   })
+
+exports.searchTitle = function(req, res){
+  Meeting.find({$text: {$search: req.params.title}}).limit(10).exec(function(err, meetings){
+    if (err){ return res.status(500).send("Internal server error") }
+    else{
+      return res.json(meetings)
+    }
+  })
+}
 };
