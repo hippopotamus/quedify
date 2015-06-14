@@ -9,7 +9,7 @@
     <p>to: {!{meeting.to}}</p>
     <p>location: {!{meeting.location}}</p>
     <p>description: {!{meeting.description}}</p>
-    {!{meeting.participants}}
+    <div ng-repeat="p in meeting.participants">{!{p}}</div>
     </li>
   </ul>
 </div>
