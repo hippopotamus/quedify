@@ -26,7 +26,7 @@ exports.create = function(req, res) {
   meeting.save(function (err, meeting){
     if (err){ res.send("There was a problem adding the information to the database."); }
     else{
-      res.redirect("meetings");
+      res.json({"success": true});
     }
   });
 };
@@ -44,7 +44,7 @@ exports.edit = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      res.render('meetings/edit', {"meeting": meeting})
+      res.json(meeting)
     }
   })
 };
@@ -63,7 +63,7 @@ exports.update = function(req, res){
       }, function (err, meeting){
         if (err){ res.send("There was a problem saving the information to the database."); }
         else{
-          res.redirect("/meetings");
+          res.json({"success": true});
         }
       })
     }
@@ -74,7 +74,7 @@ exports.delete = function(req, res){
   Meeting.remove({"_id": req.params.id}, function(err, doc){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      res.redirect('/meetings')
+      res.json({"success": true})
     }
   })
 };
