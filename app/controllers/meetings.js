@@ -77,13 +77,13 @@ exports.delete = function(req, res){
       res.json({"success": true})
     }
   })
+};
 
 exports.searchTitle = function(req, res){
-  Meeting.find({$text: {$search: req.params.title}}).limit(10).exec(function(err, meetings){
-    if (err){ return res.status(500).send("Internal server error") }
+  Meeting.find({title: new RegExp("^"+req.params.title)}).limit(10).exec(function(err, meetings){
+    if (err){ return res.status(500).render("error"); }
     else{
-      return res.json(meetings)
-    }
-  })
-}
+      return res.json(meetings);
+    };
+  });
 };

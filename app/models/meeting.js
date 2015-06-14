@@ -1,9 +1,5 @@
 var mongoose = require('mongoose');
 
-// var getParticipants = function (tags) {
-//   return tags.join(', ');
-// };
-
 var setParticipants = function (tags) {
   return tags.split(',').map(function(tag){ return tag.trim() });
 };
