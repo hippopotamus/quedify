@@ -14,7 +14,7 @@ module.exports = function(app){
   app.get('/meetings/:id/edit', meetings.edit);
   app.put('/meetings/:id', meetings.update);
   app.delete('/meetings/:id', meetings.delete);
-  app.get('/meetings/:id/search_title/:title', meetings.searchTitle)
+  app.get('/meetings/search/:title', meetings.searchTitle)
 
   app.use(function (req, res, next) {
     res.status(404);
