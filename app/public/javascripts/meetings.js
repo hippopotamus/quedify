@@ -23,7 +23,6 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.createMeeting = function(){
     $http.post('/meetings', $scope.meeting).success(function(data){
-      console.log("sup")
       $scope.getMeetings()
     }).error(function(data){
       console.log(data)
