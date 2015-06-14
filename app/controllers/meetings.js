@@ -60,7 +60,7 @@ exports.update = function(req, res){
         location: req.body.location,
         description: req.body.description,
         participants: req.body.participants
-      }, function (err, meeting){
+      }, function (err, data){
         if (err){ return res.status(500).render("error"); }
         else{
           res.json({"success": true});
