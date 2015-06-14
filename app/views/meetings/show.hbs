@@ -7,11 +7,8 @@
     <p>description: {!{meeting.description}}</p>
     {!{meeting.participants}}
 
-    <a href="/meetings/{!{meeting._id}}/edit"><button>edit</button></a>
+    <button ng-click="editMeeting(meeting._id)">edit</button>
 
-    <form action="/meetings/{!{meeting._id}}" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <button type="submit">delete</button>
-    </form>
+    <button ng-click="deleteMeeting(meeting._id)" type="submit">delete</button>
   </div>
 </div>

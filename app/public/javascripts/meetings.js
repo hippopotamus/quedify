@@ -22,9 +22,33 @@ app.controller('MeetingController', function($scope, $http){
   }
 
   $scope.createMeeting = function(){
-    console.log($scope.meeting)
     $http.post('/meetings', $scope.meeting).success(function(data){
       console.log("sup")
+      $scope.getMeetings()
+    }).error(function(data){
+      console.log(data)
+    })
+  }
+
+  $scope.editMeeting = function(id){
+    $http.get('/meetings/'+id+'/edit').success(function(data){
+      $scope.showEditForm = true
+      $scope.editMeeting = data
+    }).error(function(data){
+      console.log(data)
+    })
+  }
+
+  $scope.updateMeeting = function(){
+    $http.put('/meetings/'+$scope.editMeeting._id, $scope.editMeeting).success(function(data){
+      $scope.getMeetings()
+    }).error(function(data){
+      console.log(data)
+    })
+  }
+
+  $scope.deleteMeeting = function(id){
+    $http.delete('/meetings/'+id).success(function(data){
       $scope.getMeetings()
     }).error(function(data){
       console.log(data)
