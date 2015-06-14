@@ -5,8 +5,8 @@ app.config(function($interpolateProvider) {
 });
 
 app.controller('MeetingController', function($scope, $http){
-  $scope.getMeetings = function(uri){
-    $http.get("/meetings"+uri).success(function(data){
+  $scope.getMeetings = function(){
+    $http.get('/meetings').success(function(data){
       $scope.meetingsList = data
     }).error(function(data){
       console.log(data)
@@ -52,6 +52,21 @@ app.controller('MeetingController', function($scope, $http){
     }).error(function(data){
       console.log(data)
     })
+  }
+
+  $scope.searchTitle = function(uri){
+    if (uri === undefined || uri.length === 0){ return $scope.getMeetings() }
+    $http.get('/meetings/search/'+uri).success(function(data){
+      if (data.length > 1){
+        $scope.meetingsList = data
+      }
+      else{
+        $scope.showMeeting = {"meeting": data[0]} // this is so hacky
+      }
+    }).error(function(data){
+      console.log(data)
+    })
+
   }
 });
 
