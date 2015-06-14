@@ -1,15 +1,17 @@
-<h4>{{meeting.title}}</h4>
-<p>from: {{meeting.from}}</p>
-<p>to: {{meeting.to}}</p>
-<p>location: {{meeting.location}}</p>
-<p>description: {{meeting.description}}</p>
-{{#each meeting.participants}}
-  {{this}}
-{{/each}}
+<div ng-scope="getMeeting">
+  <div ng-repeat="meeting in showMeeting"> {{!-- this hack is embarassing --}}
+    <h4>{!{meeting.title}}</h4>
+    <p>from: {!{meeting.from}}</p>
+    <p>to: {!{meeting.to}}</p>
+    <p>location: {!{meeting.location}}</p>
+    <p>description: {!{meeting.description}}</p>
+    {!{meeting.participants}}
 
-<a href="/meetings/{{meeting._id}}/edit"><button>edit</button></a>
+    <a href="/meetings/{!{meeting._id}}/edit"><button>edit</button></a>
 
-<form action="/meetings/{{meeting.id}}" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <button type="submit">delete</button>
-</form>
+    <form action="/meetings/{!{meeting._id}}" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit">delete</button>
+    </form>
+  </div>
+</div>

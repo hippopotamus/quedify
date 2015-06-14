@@ -4,7 +4,7 @@
   <ul>
     <li ng-repeat="meeting in meetingsList">
     <h4>{!{meeting.title}}</h4>
-    <p><a data-uri="/meetings/{!{meeting._id}}" href="#">{!{meeting._id}}</a></p>
+    <p><a ng-click="getMeeting(meeting._id)" href="#">{!{meeting._id}}</a></p>
     <p>from: {!{meeting.from}}</p>
     <p>to: {!{meeting.to}}</p>
     <p>location: {!{meeting.location}}</p>

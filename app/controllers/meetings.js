@@ -5,7 +5,7 @@ var Meeting = require('../models/meeting.js')
 
 exports.index = function(req, res, next) {
   Meeting.find(function(e, docs){
-      res.json({"meetings" : docs });
+      res.json(docs);
   });
 };
 
@@ -35,7 +35,7 @@ exports.show = function(req, res){
   Meeting.findOne({"_id": req.params.id}, function(err, meeting){
     if (err){ res.status(404).send("404 doesn't exist"); }
     else{
-      res.render('meetings/show', {"meeting": meeting})
+      res.json(meeting)
     }
   })
 };

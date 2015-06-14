@@ -1,13 +1,11 @@
 <h1>Add Meeting to Calender</h1>
 
-<form name="createMeeting" action="/meetings" method="POST">
-  <input type="text" name="title" placeholder="title" >
-  <input type="text" name="from" placeholder="from">
-  <input type="text" name="to"placeholder="to">
-  <input type="text" name="location" placeholder="location">
-  <input type="text" name="description" placeholder="description">
-  <input type="text" name="participants" placeholder="participants">
-  <button type="submit">Submit</button>
-</form>
+<input type="text" ng-model="meeting.title" placeholder="title" >
+<input type="text" ng-model="meeting.from" placeholder="from">
+<input type="text" ng-model="meeting.to"placeholder="to">
+<input type="text" ng-model="meeting.location" placeholder="location">
+<input type="text" ng-model="meeting.description" placeholder="description">
+<input type="text" ng-model="meeting.participants" placeholder="participants">
+<button ng-click="createMeeting()" type="submit">Submit</button>
 
 
