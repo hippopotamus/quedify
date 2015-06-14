@@ -22,7 +22,7 @@ app.controller('MeetingController', function($scope, $http){
       })
       $scope.meetingsList = data
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -30,7 +30,7 @@ app.controller('MeetingController', function($scope, $http){
     $http.get('/meetings/'+id).success(function(data){
       $scope.showMeeting = {"meeting": data} // this is so hacky
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -38,7 +38,7 @@ app.controller('MeetingController', function($scope, $http){
     $http.post('/meetings', $scope.newMeeting).success(function(data){
       $scope.getMeetings()
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -47,7 +47,7 @@ app.controller('MeetingController', function($scope, $http){
       $scope.showEditForm = true
       $scope.editMeeting = data
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -56,7 +56,7 @@ app.controller('MeetingController', function($scope, $http){
       $scope.getMeetings()
       $scope.getMeeting($scope.editMeeting._id)
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -64,7 +64,7 @@ app.controller('MeetingController', function($scope, $http){
     $http.delete('/meetings/'+id).success(function(data){
       $scope.getMeetings()
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 
@@ -88,7 +88,7 @@ app.controller('MeetingController', function($scope, $http){
         $scope.showMeeting = {"meeting": data[0]} // this is so hacky
       }
     }).error(function(data){
-      console.log(data)
+      console.log("error")
     })
   }
 });
