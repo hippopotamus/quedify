@@ -1,7 +1,12 @@
 <p>Welcome to {{title}}</p>
 <button ng-click="getMeetings()">get meetings</button>
-
-{{> meetings/index}}
-{{> meetings/new}}
-{{> meetings/show}}
-{{> meetings/edit}}
+<div class="row">
+  <div class="col-md-6">
+    {{> meetings/new}}
+    {{> meetings/index}}
+  </div>
+  <div class="col-md-6">
+    {{> meetings/show}}
+    {{> meetings/edit}}
+  </div>
+</div>
