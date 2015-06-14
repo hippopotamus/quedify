@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
-// var getParticipants = function (tags) {
-//   return tags.join(',');
-// };
+var getParticipants = function (tags) {
+  return tags.join(', ');
+};
 
 var setParticipants = function (tags) {
   return tags.split(',').map(function(tag){ return tag.trim() });
@@ -14,7 +14,7 @@ var MeetingSchema = new mongoose.Schema({
   to: {type: Date},
   location: {type: String, default: ''},
   description: {type: String, default: ''},
-  participants: {type: [], set: setParticipants}
+  participants: {type: [], get: getParticipants, set: setParticipants}
 })
 
 MeetingSchema.path('title').required(true, "'Title' field cannot be blank");
