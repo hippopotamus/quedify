@@ -1,9 +1,13 @@
 <div ng-scope="getMeetings">
   <h1>Meetings list</h1>
 
-  <ul>
+  <ul class="list-group">
     <a ng-repeat="meeting in meetingsList" ng-click="getMeeting(meeting._id)">
-      <li><p>{!{meeting.title}} -- from: {!{meeting.from}} to: {!{meeting.to}}</p></li>
+      <li class="list-group-item">
+        <h4>{!{meeting.title}}</h4>
+        <p>From: {!{meeting.from}}</p>
+        <p>To: {!{meeting.to}}</p>
+      </li>
     </a>
   </ul>
 </div>

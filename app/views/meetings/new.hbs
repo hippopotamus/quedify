@@ -1,14 +1,14 @@
 <h1>Add Meeting to Calender</h1>
-<div ng-init="newMeeting()">
-  <form>
-    <input type="text" ng-model="newMeeting.title" placeholder="title" >
-    <input type="text" id="newMeetingFrom" ng-model="newMeeting.from" placeholder="from">
-    <input type="text" id="newMeetingTo" ng-model="newMeeting.to"placeholder="to">
-    <input type="text" ng-model="newMeeting.location" placeholder="location">
-    <input type="text" ng-model="newMeeting.description" placeholder="description">
-    <input type="text" ng-model="newMeeting.participants" placeholder="participants">
-    <button ng-submit="createMeeting()" type="submit">Submit</button>
-  </form>
-</div>
+<div ng-click="newMeetingForm()"></div>
+<form ng-submit="createMeeting()">
+  <input type="text" ng-model="newMeeting.title" placeholder="title" >
+  <input type="text" id="newMeetingFrom" ng-model="newMeeting.from" placeholder="from">
+  <input type="text" id="newMeetingTo" ng-model="newMeeting.to" placeholder="to">
+  <input type="text" ng-model="newMeeting.location" placeholder="location">
+  <input type="text" ng-model="newMeeting.description" placeholder="description">
+  <input type="text" ng-model="newMeeting.participants" placeholder="participants">
+  <button>Submit</button>
+</form>
+
 
 
