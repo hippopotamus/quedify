@@ -24,7 +24,7 @@ exports.create = function(req, res) {
   })
 
   meeting.save(function (err, meeting){
-    if (err){ return res.send("There was a problem adding the information to the database."); }
+    if (err){ return res.status(500).render("error"); }
     else{
       return res.json({"success": true});
     }
