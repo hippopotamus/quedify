@@ -56,16 +56,12 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.$watch('titleSearch.title', function(text){
     if(text === undefined || text.length === 0){ return }
-    console.log("yo")
     $http.get('/meetings/search/'+text).success(function(data){
-      if (data.length === 0){ return }
-      else{
-        $('#titleSearch').autocomplete({
-          source: data.map(function(meeting){ return meeting.title })
-        })
-      }
+      $('#titleSearch').autocomplete({
+        source: data.map(function(meeting){ return meeting.title })
+      })
     })
-    })
+  })
 
   $scope.searchTitle = function(uri){
     if (uri === undefined || uri.length === 0){ return $scope.getMeetings() }
