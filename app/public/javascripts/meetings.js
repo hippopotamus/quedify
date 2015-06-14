@@ -5,8 +5,8 @@ app.config(function($interpolateProvider) {
 });
 
 app.controller('MeetingController', function($scope, $http){
-  $scope.getMeetings = function(){
-    $http.get('/meetings').success(function(data){
+  $scope.getMeetings = function(uri){
+    $http.get("/meetings"+uri).success(function(data){
       $scope.meetingsList = data
     }).error(function(data){
       console.log(data)

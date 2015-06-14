@@ -1,4 +1,4 @@
 <div ng-scope="titleSearch">
   <input type="text" ng-model="titleSearch.title" placeholder="Search by title">
-  <button ng-click="searchTitle()">Search</button>
+  <button ng-click="getMeetings('/search/'+titleSearch.title)">Search</button>
 </div>
