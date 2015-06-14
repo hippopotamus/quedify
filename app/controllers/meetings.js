@@ -5,7 +5,7 @@ var Meeting = require('../models/meeting.js')
 
 exports.index = function(req, res, next) {
   Meeting.find(function(e, docs){
-      res.json({"collection" : docs });
+      res.json({"meetings" : docs });
   });
 };
 
