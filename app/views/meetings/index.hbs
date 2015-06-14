@@ -2,14 +2,8 @@
   <h1>Meetings list</h1>
 
   <ul>
-    <li ng-repeat="meeting in meetingsList">
-    <h4>{!{meeting.title}}</h4>
-    <p><a ng-click="getMeeting(meeting._id)" href="#">{!{meeting._id}}</a></p>
-    <p>from: {!{meeting.from}}</p>
-    <p>to: {!{meeting.to}}</p>
-    <p>location: {!{meeting.location}}</p>
-    <p>description: {!{meeting.description}}</p>
-    <div ng-repeat="p in meeting.participants">{!{p}}</div>
-    </li>
+    <a ng-repeat="meeting in meetingsList" ng-click="getMeeting(meeting._id)">
+      <li><p>{!{meeting.title}} -- from: {!{meeting.from}} to: {!{meeting.to}}</p></li>
+    </a>
   </ul>
 </div>
