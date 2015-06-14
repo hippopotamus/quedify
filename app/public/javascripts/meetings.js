@@ -26,6 +26,11 @@ app.controller('MeetingController', function($scope, $http){
     })
   }
 
+  $scope.newMeeting = function(){
+    $('#newMeetingFrom').datetimepicker();
+    $('#newMeetingTo').datetimepicker();
+  }
+
   $scope.createMeeting = function(){
     $http.post('/meetings', $scope.meeting).success(function(data){
       $scope.getMeetings()
@@ -48,6 +53,7 @@ app.controller('MeetingController', function($scope, $http){
   $scope.updateMeeting = function(){
     $http.put('/meetings/'+$scope.editMeeting._id, $scope.editMeeting).success(function(data){
       $scope.getMeetings()
+      $scope.getMeeting($scope.editMeeting._id)
     }).error(function(data){
       console.log(data)
     })
