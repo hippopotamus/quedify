@@ -7,6 +7,11 @@ app.config(function($interpolateProvider) {
 app.controller('MeetingController', function($scope, $http){
   $scope.getMeetings = function(){
     $http.get('/meetings').success(function(data){
+      data.map(function(meeting){
+        meeting.from = Date(meeting.from)
+        meeting.to = Date(meeting.to)
+        return meeting
+      })
       $scope.meetingsList = data
     }).error(function(data){
       console.log(data)
@@ -31,6 +36,8 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.editMeeting = function(id){
     $http.get('/meetings/'+id+'/edit').success(function(data){
+      $('#editMeetingFrom').datetimepicker();
+      $('#editMeetingTo').datetimepicker();
       $scope.showEditForm = true
       $scope.editMeeting = data
     }).error(function(data){

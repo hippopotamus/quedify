@@ -2,8 +2,8 @@
   <h1>Edit Meeting</h1>
   <input type="hidden" ng-model="editMeeting._id" value="{!{_id}}">
   <input type="text" ng-model="editMeeting.title" value="{!{title}}">
-  <input type="text" ng-model="editMeeting.from" value="{!{from}}">
-  <input type="text" ng-model="editMeeting.to" value="{!{to}}">
+  <input type="text" id="editMeetingFrom" ng-model="editMeeting.from" value="{!{from}}">
+  <input type="text" id="editMeetingTo" ng-model="editMeeting.to" value="{!{to}}">
   <input type="text" ng-model="editMeeting.location" value="{!{location}}">
   <input type="text" ng-model="editMeeting.description" value="{!{description}}">
   <input type="text" ng-model="editMeeting.participants" value="{!{participants}}">
