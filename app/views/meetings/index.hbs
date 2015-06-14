@@ -4,9 +4,8 @@
   <ul class="list-group">
     <a ng-repeat="meeting in meetingsList" ng-click="getMeeting(meeting._id)">
       <li class="list-group-item">
-        <h4>{!{meeting.title}}</h4>
-        <p>From: {!{meeting.from}}</p>
-        <p>To: {!{meeting.to}}</p>
+        <h3>{!{meeting.title}}</h3>
+        <p class="lead">{!{meeting.from}} &nbsp <strong>--</strong> &nbsp {!{meeting.to}}</p>
       </li>
     </a>
   </ul>

@@ -1,14 +1,20 @@
-<div ng-scope="getMeeting">
+<div ng-show="showMeeting">
   <div ng-repeat="meeting in showMeeting"> {{!-- this hack is embarassing --}}
-    <h4>{!{meeting.title}}</h4>
-    <p>from: {!{meeting.from}}</p>
-    <p>to: {!{meeting.to}}</p>
-    <p>location: {!{meeting.location}}</p>
-    <p>description: {!{meeting.description}}</p>
-    {!{meeting.participants}}
+    <h3><strong>{!{meeting.title}}</strong></h3>
+    <p class="lead">{!{meeting.from}} &nbsp <strong>--</strong> &nbsp {!{meeting.to}}</p>
+    <p class="lead"><strong>location:</strong> {!{meeting.location}}</p>
+    <p class="lead"><strong>description:</strong> {!{meeting.description}}</p>
+    <p class="lead"><strong>Participants:</strong> {!{meeting.participants}}</p>
+    <div class="row">
+        <div class="col-sm-2">
 
-    <button ng-click="editMeeting(meeting._id)">edit</button>
+        <button class="btn btn-primary" ng-click="editMeeting(meeting._id)">edit</button>
+        </div>
+        <div class="col-sm-offset-8 col-sm-2">
 
-    <button ng-click="deleteMeeting(meeting._id)" type="submit">delete</button>
+        <button class="btn" ng-click="deleteMeeting(meeting._id)" type="submit">delete</button>
+        </div>
+    </div>
+
   </div>
 </div>
