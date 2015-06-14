@@ -5,11 +5,19 @@ app.config(function($interpolateProvider) {
 });
 
 app.controller('MeetingController', function($scope, $http){
+  $scope.initApp = function(){
+    $('#newMeetingFrom').datetimepicker();
+    $('#newMeetingTo').datetimepicker();
+    $('#editMeetingFrom').datetimepicker();
+    $('#editMeetingTo').datetimepicker();
+    $scope.getMeetings()
+  }
+
   $scope.getMeetings = function(){
     $http.get('/meetings').success(function(data){
       data.map(function(meeting){
-        meeting.from = Date(meeting.from)
-        meeting.to = Date(meeting.to)
+        meeting.from = new Date(meeting.from).toLocaleString()
+        meeting.to = new Date(meeting.to).toLocaleString()
         return meeting
       })
       $scope.meetingsList = data
@@ -26,13 +34,8 @@ app.controller('MeetingController', function($scope, $http){
     })
   }
 
-  $scope.newMeeting = function(){
-    $('#newMeetingFrom').datetimepicker();
-    $('#newMeetingTo').datetimepicker();
-  }
-
   $scope.createMeeting = function(){
-    $http.post('/meetings', $scope.meeting).success(function(data){
+    $http.post('/meetings', $scope.newMeeting).success(function(data){
       $scope.getMeetings()
     }).error(function(data){
       console.log(data)
@@ -41,8 +44,6 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.editMeeting = function(id){
     $http.get('/meetings/'+id+'/edit').success(function(data){
-      $('#editMeetingFrom').datetimepicker();
-      $('#editMeetingTo').datetimepicker();
       $scope.showEditForm = true
       $scope.editMeeting = data
     }).error(function(data){
@@ -89,7 +90,6 @@ app.controller('MeetingController', function($scope, $http){
     }).error(function(data){
       console.log(data)
     })
-
   }
 });
 
