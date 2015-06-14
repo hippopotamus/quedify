@@ -1,6 +1,13 @@
 <div ng-scope="titleSearch">
-  <form class="ui-widget">
-    <input id="titleSearch" type="text" ng-model="titleSearch.title" placeholder="Search by title">
-    <button ng-click="searchTitle(titleSearch.title)">Search</button>
-  </form>
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <button class="btn btn-primary" ng-click="getMeetings()">get meetings</button>
+  </div>
+  <div class="col-md-9 col-xs-12">
+    <form class="ui-widget form-inline">
+      <input class="form-control" id="titleSearch" type="text" ng-model="titleSearch.title" placeholder="Search by title">
+      <button class="btn" ng-click="searchTitle(titleSearch.title)">Search</button>
+    </form>
+  </div>
+</div>
 </div>
