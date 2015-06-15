@@ -10,7 +10,7 @@ app.controller('MeetingController', function($scope, $http){
     $('#newMeetingTo').datetimepicker();
     $('#editMeetingFrom').datetimepicker();
     $('#editMeetingTo').datetimepicker();
-    $scope.showNewForm = true
+    $scope.showForm = true
     $scope.getMeetings()
   }
 
@@ -49,8 +49,7 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.editMeeting = function(id){
     $http.get('/meetings/'+id+'/edit').success(function(data){
-      $scope.showNewForm = false
-      $scope.showEditForm = true
+      $scope.showForm = !$scope.showForm
       $scope.editMeeting = data
     }).error(function(data){
       console.log("error")
@@ -59,8 +58,7 @@ app.controller('MeetingController', function($scope, $http){
 
   $scope.updateMeeting = function(){
     $http.put('/meetings/'+$scope.editMeeting._id, $scope.editMeeting).success(function(data){
-      $scope.showNewForm = true
-      $scope.showEditForm = false
+      $scope.showForm = !$scope.showForm
       $scope.getMeetings()
       $scope.getMeeting($scope.editMeeting._id)
     }).error(function(data){
