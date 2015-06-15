@@ -119,19 +119,6 @@ describe('events', function(){
       })
     })
 
-    describe('GET /:id/edit', function(done){
-      it('should render 200', function(done){
-        Event.findOne({title: "tea with teddy bear"}, function(err, event){
-          if (err){ throw err }
-          request.get('http://127.0.0.1:3001/events/'+event._id+'/edit').end(function(err, res){
-            if (err){ throw err }
-            assert.equal(res.statusCode, 200)
-            done()
-          })
-        })
-      })
-    })
-
     describe('PUT /:id', function(done){
       it('should render 404 on bad id', function(done){
         request.put('http://127.0.0.1:3001/events/lolsup').send({
