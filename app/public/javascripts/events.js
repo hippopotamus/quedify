@@ -116,6 +116,8 @@ app.controller('EventController', function($scope, $http){
     $http.get('/events/search/'+titleQuery).success(function(data){
       if (data.length === 0){ return }
       else if (data.length === 1){
+        data[0].from = new Date(data[0].from).toLocaleString();
+        data[0].to = new Date(data[0].to).toLocaleString();
         $scope.showEvent = {"event": data[0]}
       }
       else{
