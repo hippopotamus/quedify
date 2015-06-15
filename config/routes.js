@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var meetings = require('../app/controllers/meetings.js')
+var events = require('../app/controllers/events.js')
 
 module.exports = function(app){
   app.get('/', function(req, res, next) {
     res.render('index');
   });
 
-  app.get('/meetings', meetings.index);
-  app.get('/meetings/new', meetings.new);
-  app.post('/meetings/', meetings.create);
-  app.get('/meetings/:id', meetings.show);
-  app.get('/meetings/:id/edit', meetings.edit);
-  app.put('/meetings/:id', meetings.update);
-  app.delete('/meetings/:id', meetings.delete);
-  app.get('/meetings/search/:title', meetings.searchTitle)
+  app.get('/events', events.index);
+  app.get('/events/new', events.new);
+  app.post('/events/', events.create);
+  app.get('/events/:id', events.show);
+  app.get('/events/:id/edit', events.edit);
+  app.put('/events/:id', events.update);
+  app.delete('/events/:id', events.delete);
+  app.get('/events/search/:title', events.searchTitle);
 
   app.use(function (req, res, next) {
     res.status(404);
@@ -44,4 +44,4 @@ module.exports = function(app){
       error: {}
     });
   });
-}
+};

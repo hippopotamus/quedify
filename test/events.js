@@ -4,16 +4,16 @@ var app = require('../app.js');
 var server = http.createServer(app);
 var request = require('superagent')
 
-var Meeting = require('../app/models/meeting.js')
+var Event = require('../app/models/event.js')
 
-describe('meetings', function(){
-  describe('meeting model:', function(){
+describe('events', function(){
+  describe('event model:', function(){
     after(function(){
-      Meeting.collection.remove()
+      Event.collection.remove()
     })
 
     it('should create without error', function(done){
-      var meeting = new Meeting({
+      var event = new Event({
         title: "visiting mom",
         from: "2015-04-25",
         to: "2015-04-27",
@@ -22,7 +22,7 @@ describe('meetings', function(){
         participants: "mom, me, poppa"
       })
 
-      meeting.save(function (err, meeting){
+      event.save(function (err, event){
         if (err){ throw err; }
         else{
           done()
@@ -31,37 +31,37 @@ describe('meetings', function(){
     })
 
     it('should save participants as an array', function(done){
-      Meeting.findOne({"title": "visiting mom"}, function(err, meeting){
+      Event.findOne({"title": "visiting mom"}, function(err, event){
         if (err){ throw err; }
-        assert.equal(meeting.participants[0], "mom")
-        assert.equal(meeting.participants[1], "me")
-        assert.equal(meeting.participants[2], "poppa")
+        assert.equal(event.participants[0], "mom")
+        assert.equal(event.participants[1], "me")
+        assert.equal(event.participants[2], "poppa")
         done()
       })
     })
   })
 
-  describe('/meetings', function(){
+  describe('/events', function(){
     before(function(){
       server.listen(3001)
     });
 
     after(function(){
       server.close()
-      Meeting.collection.remove()
+      Event.collection.remove()
     })
 
     it('should be an empty collection', function(done){
-      Meeting.find(function(err, meetings){
+      Event.find(function(err, events){
         if (err){ throw err }
-        assert.equal(meetings.length, 0)
+        assert.equal(events.length, 0)
         done()
       })
     })
 
     describe('GET /', function(){
       it('should return a status code of 200', function(done){
-        request.get('http://127.0.0.1:3001/meetings').end(function(err, res){
+        request.get('http://127.0.0.1:3001/events').end(function(err, res){
           if (err){ throw err; }
           assert.equal(res.statusCode, 200);
           done();
@@ -71,7 +71,7 @@ describe('meetings', function(){
 
     describe('POST /', function(){
       it('should return a status code of 200', function(done){
-        request.post('http://127.0.0.1:3001/meetings').send({
+        request.post('http://127.0.0.1:3001/events').send({
           title: "tea with teddy bear",
           from: "2015-04-28",
           to: "2015-04-29",
@@ -85,10 +85,10 @@ describe('meetings', function(){
         });
       });
 
-      it('should have an instance of the meeting', function(done){
-        Meeting.find(function(err, meetings){
+      it('should have an instance of the event', function(done){
+        Event.find(function(err, events){
           if (err){ throw err }
-          assert.equal(meetings.length, 1)
+          assert.equal(events.length, 1)
           done()
         })
       })
@@ -96,7 +96,7 @@ describe('meetings', function(){
 
     describe('GET /:id', function(done){
       it('should render 404 on bad id', function(done){
-        request.get('http://127.0.0.1:3001/meetings/lolsup').end(function(err, res){
+        request.get('http://127.0.0.1:3001/events/lolsup').end(function(err, res){
           if (err){
             assert.equal(res.statusCode, 404);
             done();
@@ -108,9 +108,9 @@ describe('meetings', function(){
       })
 
       it('should render 200', function(done){
-        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
+        Event.findOne({title: "tea with teddy bear"}, function(err, event){
           if (err){ throw err }
-          request.get('http://127.0.0.1:3001/meetings/'+meeting._id).end(function(err, res){
+          request.get('http://127.0.0.1:3001/events/'+event._id).end(function(err, res){
             if (err){ throw err }
             assert.equal(res.statusCode, 200)
             done()
@@ -121,9 +121,9 @@ describe('meetings', function(){
 
     describe('GET /:id/edit', function(done){
       it('should render 200', function(done){
-        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
+        Event.findOne({title: "tea with teddy bear"}, function(err, event){
           if (err){ throw err }
-          request.get('http://127.0.0.1:3001/meetings/'+meeting._id+'/edit').end(function(err, res){
+          request.get('http://127.0.0.1:3001/events/'+event._id+'/edit').end(function(err, res){
             if (err){ throw err }
             assert.equal(res.statusCode, 200)
             done()
@@ -134,7 +134,7 @@ describe('meetings', function(){
 
     describe('PUT /:id', function(done){
       it('should render 404 on bad id', function(done){
-        request.put('http://127.0.0.1:3001/meetings/lolsup').send({
+        request.put('http://127.0.0.1:3001/events/lolsup').send({
           title: "SHOULDNT WORK",
           from: "2015-04-28",
           to: "2015-04-29",
@@ -153,9 +153,9 @@ describe('meetings', function(){
       })
 
       it('should render 200', function(done){
-        Meeting.findOne({title: "tea with teddy bear"}, function(err, meeting){
+        Event.findOne({title: "tea with teddy bear"}, function(err, event){
           if (err){ throw err }
-          request.put('http://127.0.0.1:3001/meetings/'+meeting._id).send({
+          request.put('http://127.0.0.1:3001/events/'+event._id).send({
           title: "tea with friends",
           from: "2015-04-28",
           to: "2015-04-29",
@@ -170,10 +170,10 @@ describe('meetings', function(){
         })
       })
 
-      it('should have updated the meeting', function(done){
-        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+      it('should have updated the event', function(done){
+        Event.findOne({"title": "tea with friends"}, function(err, event){
           if (err){ throw err; }
-          assert.equal(meeting.location, "mom's house")
+          assert.equal(event.location, "mom's house")
           done()
         })
       })
@@ -181,7 +181,7 @@ describe('meetings', function(){
 
     describe('DELETE /:id', function(){
       it('should render 404 on bad id', function(done){
-        request.del('http://127.0.0.1:3001/meetings/lolsup').end(function(err, res){
+        request.del('http://127.0.0.1:3001/events/lolsup').end(function(err, res){
           if (err){
             assert.equal(res.statusCode, 404);
             done();
@@ -193,9 +193,9 @@ describe('meetings', function(){
       })
 
       it('should render 200', function(done){
-        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+        Event.findOne({"title": "tea with friends"}, function(err, event){
           if (err){ throw err; }
-          request.del('http://127.0.0.1:3001/meetings/'+meeting._id).end(function(err, res){
+          request.del('http://127.0.0.1:3001/events/'+event._id).end(function(err, res){
             if (err){ throw err; }
             assert.equal(res.statusCode, 200);
             done();
@@ -203,10 +203,10 @@ describe('meetings', function(){
         })
       })
 
-      it('should have deleted the meeting', function(done){
-        Meeting.findOne({"title": "tea with friends"}, function(err, meeting){
+      it('should have deleted the event', function(done){
+        Event.findOne({"title": "tea with friends"}, function(err, event){
           if (err){ throw err; }
-          assert.equal(meeting, null)
+          assert.equal(event, null)
           done()
         })
       })
