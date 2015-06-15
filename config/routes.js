@@ -9,11 +9,10 @@ module.exports = function(app){
 
   app.get('/events', events.index);
   app.post('/events', events.create);
+  app.delete('/events', events.deleteAll);
   app.get('/events/:id', events.show);
-  app.get('/events/:id/edit', events.edit);
   app.put('/events/:id', events.update);
   app.delete('/events/:id', events.delete);
-  app.delete('/events', events.deleteAll);
 
   app.get('/events/search/:title', events.searchTitle);
 
