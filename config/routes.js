@@ -8,7 +8,6 @@ module.exports = function(app){
   });
 
   app.get('/events', events.index);
-  app.get('/events/new', events.new);
   app.post('/events/', events.create);
   app.get('/events/:id', events.show);
   app.get('/events/:id/edit', events.edit);

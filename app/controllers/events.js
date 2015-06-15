@@ -9,10 +9,6 @@ exports.index = function(req, res, next) {
   });
 };
 
-exports.new = function(req, res, next) {
-  res.render('events/new');
-};
-
 exports.create = function(req, res) {
   var event = new Event({
     title: req.body.title,
