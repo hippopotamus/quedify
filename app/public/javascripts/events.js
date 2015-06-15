@@ -112,12 +112,17 @@ app.controller('EventController', function($scope, $http){
 
   $scope.searchTitle = function(){
     var titleQuery = jQuery('#titleSearch').val()
-    if (titleQuery === undefined || titleQuery.length === 0){ return $scope.getEvents() }
+    if (titleQuery === undefined || titleQuery.length === 0){
+      $scope.showEvent = false
+      $scope.getEvents()
+      return
+    }
     $http.get('/events/search/'+titleQuery).success(function(data){
       if (data.length === 0){ return }
       else if (data.length === 1){
         data[0].from = new Date(data[0].from).toLocaleString();
         data[0].to = new Date(data[0].to).toLocaleString();
+        data[0].participants = data[0].participants.join(', ');
         $scope.showEvent = {"event": data[0]}
       }
       else{
