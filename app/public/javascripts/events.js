@@ -54,12 +54,15 @@ app.controller('EventController', function($scope, $http){
 
   $scope.editEvent = function(id){
     $http.get('/events/'+id+'/edit').success(function(data){
-      console.log($scope.editEvent)
       $scope.showForm = !$scope.showForm
       $scope.editEventModel = data
     }).error(function(data){
       console.log("error")
     })
+  }
+
+  $scope.cancelEdit = function(){
+    $scope.showForm = !$scope.showForm
   }
 
   $scope.updateEvent = function(){
