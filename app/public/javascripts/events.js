@@ -1,3 +1,5 @@
+var jQuery = $.noConflict();
+
 var app = angular.module('eventsApp', [])
 
 app.config(function($interpolateProvider) {
@@ -6,10 +8,10 @@ app.config(function($interpolateProvider) {
 
 app.controller('EventController', function($scope, $http){
   $scope.initApp = function(){
-    $('#newEventFrom').datetimepicker();
-    $('#newEventTo').datetimepicker();
-    $('#editEventFrom').datetimepicker();
-    $('#editEventTo').datetimepicker();
+    jQuery('#newEventFrom').datetimepicker();
+    jQuery('#newEventTo').datetimepicker();
+    jQuery('#editEventFrom').datetimepicker();
+    jQuery('#editEventTo').datetimepicker();
     $scope.showForm = true
     $scope.getEvents()
   }
@@ -49,18 +51,19 @@ app.controller('EventController', function($scope, $http){
 
   $scope.editEvent = function(id){
     $http.get('/events/'+id+'/edit').success(function(data){
+      console.log($scope.editEvent)
       $scope.showForm = !$scope.showForm
-      $scope.editEvent = data
+      $scope.editEventModel = data
     }).error(function(data){
       console.log("error")
     })
   }
 
   $scope.updateEvent = function(){
-    $http.put('/events/'+$scope.editEvent._id, $scope.editEvent).success(function(data){
+    $http.put('/events/'+$scope.editEventModel._id, $scope.editEventModel).success(function(data){
       $scope.showForm = !$scope.showForm
       $scope.getEvents()
-      $scope.getEvent($scope.editEvent._id)
+      $scope.getEvent($scope.editEventModel._id)
     }).error(function(data){
       console.log("error")
     })
