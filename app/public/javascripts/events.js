@@ -42,6 +42,9 @@ app.controller('EventController', function($scope, $http){
   };
 
   $scope.createEvent = function(){
+    $scope.newEventModel.from = jQuery('#newEventFrom').val()
+    $scope.newEventModel.to = jQuery('#newEventTo').val()
+
     $http.post('/events', $scope.newEventModel).success(function(data){
       $scope.getEvents()
     }).error(function(data){
@@ -60,6 +63,9 @@ app.controller('EventController', function($scope, $http){
   }
 
   $scope.updateEvent = function(){
+    $scope.editEventModel.from = jQuery('#editEventFrom').val()
+    $scope.editEventModel.to = jQuery('#editEventTo').val()
+
     $http.put('/events/'+$scope.editEventModel._id, $scope.editEventModel).success(function(data){
       $scope.showForm = !$scope.showForm
       $scope.getEvents()
