@@ -36,15 +36,6 @@ exports.show = function(req, res){
   })
 };
 
-exports.edit = function(req, res){
-  Event.findOne({"_id": req.params.id}, function(err, event){
-    if (err){ return res.status(404).render("404"); }
-    else{
-      return res.json(event)
-    }
-  })
-};
-
 exports.update = function(req, res){
   Event.findOne({"_id": req.params.id}, function(err, event){
     if (err){ return res.status(404).render("404"); }
