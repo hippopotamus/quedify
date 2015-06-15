@@ -87,6 +87,17 @@ app.controller('EventController', function($scope, $http){
     })
   }
 
+  $scope.deleteAll = function(){
+    var makeSure = prompt("Are you sure you want to delete everything? Type yes to confirm.")
+    if (makeSure === "yes"){
+      $http.delete('/events').success(function(data){
+        $scope.getEvents()
+      }).error(function(data){
+        console.log("error")
+      })
+    }
+  }
+
   $scope.$watch('titleSearch.title', function(text){
     if(text === undefined || text.length === 0){ return }
     $http.get('/events/search/'+text).success(function(data){
