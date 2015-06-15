@@ -1,41 +1,41 @@
 <div ng-show="showForm">
-  <h1>Add Meeting to Calender</h1>
+  <h1>Add Event to Calender</h1>
 
-  <form class="form-horizontal" ng-submit="createMeeting()">
+  <form class="form-horizontal" ng-submit="createEvent()">
     <div class="form-group">
       <label class="col-md-3 control-label">Title</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" ng-model="newMeeting.title" placeholder="What will you be doing?" >
+        <input type="text" class="form-control" ng-model="newEvent.title" placeholder="What will you be doing?" >
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 control-label">From</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="newMeetingFrom" ng-model="newMeeting.from" placeholder="There is a conflict with angular picking up datepicker values">
+        <input type="text" class="form-control" id="newEventFrom" ng-model="newEvent.from" placeholder="There is a conflict with angular picking up datepicker values">
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 control-label">To</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="newMeetingTo" ng-model="newMeeting.to" placeholder="After picking a datetime, add and delete a character">
+        <input type="text" class="form-control" id="newEventTo" ng-model="newEvent.to" placeholder="After picking a datetime, add and delete a character">
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 control-label">Location</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" ng-model="newMeeting.location" placeholder="Where will it be?">
+        <input type="text" class="form-control" ng-model="newEvent.location" placeholder="Where will it be?">
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 control-label">Description</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" ng-model="newMeeting.description" placeholder="Any important details?">
+        <input type="text" class="form-control" ng-model="newEvent.description" placeholder="Any important details?">
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 control-label">Participants</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" ng-model="newMeeting.participants" placeholder="Use commas to separate participants">
+        <input type="text" class="form-control" ng-model="newEvent.participants" placeholder="Use commas to separate participants">
       </div>
     </div>
     <div class="form-group">

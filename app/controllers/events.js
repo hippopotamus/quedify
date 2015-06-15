@@ -10,7 +10,7 @@ exports.index = function(req, res, next) {
 };
 
 exports.new = function(req, res, next) {
-  res.render('meetings/new');
+  res.render('events/new');
 };
 
 exports.create = function(req, res) {
@@ -80,10 +80,10 @@ exports.delete = function(req, res){
 };
 
 exports.searchTitle = function(req, res){
-  Event.find({title: new RegExp("^"+req.params.title)}).limit(10).exec(function(err, meetings){
+  Event.find({title: new RegExp("^"+req.params.title)}).limit(10).exec(function(err, events){
     if (err){ return res.status(500).render("error"); }
     else{
-      return res.json(meetings);
+      return res.json(events);
     };
   });
 };

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="meetingsApp">
+<html ng-app="eventsApp">
 <head>
   <title>{{title}}</title>
   <meta charset="UTF-8">
@@ -13,12 +13,12 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script src="/javascripts/datetimepicker.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <script src="/javascripts/meetings.js"></script>
+  <script src="/javascripts/events.js"></script>
 <body>
 <div class="container-fluid navbar navbar-default text-center"><h1>My Calender</h1></div>
 
 <div class="container">
-  <div ng-controller="MeetingController">
+  <div ng-controller="EventController">
     {{{ body }}}
   </div>
 </div>
