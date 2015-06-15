@@ -7,5 +7,5 @@ module.exports = {
   },
   "production": {
     "dbConnectionString": "mongodb://assessment:assessmentEvents2014@ds037977.mongolab.com:37977/events"
-  },
+  }
 }
