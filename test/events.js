@@ -251,5 +251,55 @@ describe('events', function(){
         })
       })
     })
+
+    describe('title search', function(){
+      before(function(){
+        var events = [
+          {
+            title: "tea with teddy bear",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "mom's house",
+            description: "TEA TIME",
+            participants: "mom, teddy bear"
+          },
+          {
+            title: "coffee with dog",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "living room",
+            description: "coffe time",
+            participants: "me, doge"
+          },
+          {
+            title: "coffee",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "computer",
+            description: "yo",
+            participants: "just me"
+          },
+        ]
+        Event.collection.insert(events, function(err, docs){
+          if (err){ throw err; }
+        })
+      })
+
+      it('should return only all matching items', function(done){
+        request.get('http://127.0.0.1:3001/events/search/coff').end(function(err, res){
+          if (err){ throw err; }
+          assert.equal(res.body.length, 2)
+          done()
+        });
+      });
+
+      it('should return an empty list when no matches are found', function(done){
+        request.get('http://127.0.0.1:3001/events/search/hello').end(function(err, res){
+          if (err){ throw err; }
+          assert.equal(res.body.length, 0)
+          done()
+        });
+      });
+    });
   });
 });
