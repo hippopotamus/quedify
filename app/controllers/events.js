@@ -75,6 +75,15 @@ exports.delete = function(req, res){
   })
 };
 
+exports.deleteAll = function(req, res){
+  Event.remove({}, function(err, doc){
+    if (err){ return res.status(404).render("404"); }
+    else{
+      res.json({"success": true})
+    }
+  })
+}
+
 exports.searchTitle = function(req, res){
   Event.find({title: new RegExp("^"+req.params.title)}).limit(10).exec(function(err, events){
     if (err){ return res.status(500).render("error"); }
