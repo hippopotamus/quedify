@@ -211,5 +211,58 @@ describe('events', function(){
         })
       })
     })
+    describe('DELETE /', function(){
+      before(function(){
+        var events = [
+          {
+            title: "tea with teddy bear",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "mom's house",
+            description: "TEA TIME",
+            participants: "mom, teddy bear"
+          },
+          {
+            title: "coffee with dog",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "living room",
+            description: "coffe time",
+            participants: "me, doge"
+          },
+          {
+            title: "chill",
+            from: "2015-04-28",
+            to: "2015-04-29",
+            location: "computer",
+            description: "yo",
+            participants: "just me"
+          },
+        ]
+        Event.collection.insert(events, function(err, docs){
+          if (err){ throw err; }
+        })
+      })
+
+      it('should render 200', function(done){
+        Event.find(function(err, events){
+          if (err){ throw err; }
+          assert.equal(events.length, 3)
+          request.del('http://127.0.0.1:3001/events/').end(function(err, res){
+            if (err){ throw err; }
+            assert.equal(res.statusCode, 200);
+            done();
+          });
+        })
+      })
+
+      it('should have deleted the events', function(done){
+        Event.find(function(err, events){
+          if (err){ throw err; }
+          assert.equal(events.length, 0)
+          done()
+        })
+      })
+    })
   });
 });
