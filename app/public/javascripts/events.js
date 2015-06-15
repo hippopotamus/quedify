@@ -42,7 +42,7 @@ app.controller('EventController', function($scope, $http){
   };
 
   $scope.createEvent = function(){
-    $http.post('/events', $scope.newEvent).success(function(data){
+    $http.post('/events', $scope.newEventModel).success(function(data){
       $scope.getEvents()
     }).error(function(data){
       console.log("error")
