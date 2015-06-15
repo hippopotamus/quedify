@@ -46,6 +46,7 @@ app.controller('EventController', function($scope, $http){
     $scope.newEventModel.to = jQuery('#newEventTo').val()
 
     $http.post('/events', $scope.newEventModel).success(function(data){
+      $scope.newEventModel = 'undefined'
       $scope.getEvents()
     }).error(function(data){
       console.log("error")
@@ -53,7 +54,7 @@ app.controller('EventController', function($scope, $http){
   }
 
   $scope.editEvent = function(id){
-    $http.get('/events/'+id+'/edit').success(function(data){
+    $http.get('/events/'+id).success(function(data){
       $scope.showForm = !$scope.showForm
       $scope.editEventModel = data
     }).error(function(data){
@@ -63,6 +64,7 @@ app.controller('EventController', function($scope, $http){
 
   $scope.cancelEdit = function(){
     $scope.showForm = !$scope.showForm
+    $scope.editEventModel = 'undefined'
   }
 
   $scope.updateEvent = function(){
@@ -80,6 +82,7 @@ app.controller('EventController', function($scope, $http){
 
   $scope.deleteEvent = function(id){
     $http.delete('/events/'+id).success(function(data){
+      $scope.showForm = true
       $scope.showEvent = false
       $scope.getEvents()
     }).error(function(data){
@@ -101,21 +104,23 @@ app.controller('EventController', function($scope, $http){
   $scope.$watch('titleSearch.title', function(text){
     if(text === undefined || text.length === 0){ return }
     $http.get('/events/search/'+text).success(function(data){
-      $('#titleSearch').autocomplete({
+      jQuery('#titleSearch').autocomplete({
         source: data.map(function(event){ return event.title })
       })
     })
   })
 
-  $scope.searchTitle = function(uri){
-    if (uri === undefined || uri.length === 0){ return $scope.getEvents() }
-    $http.get('/events/search/'+uri).success(function(data){
+  $scope.searchTitle = function(){
+    var titleQuery = jQuery('#titleSearch').val()
+    if (titleQuery === undefined || titleQuery.length === 0){ return $scope.getEvents() }
+    $http.get('/events/search/'+titleQuery).success(function(data){
       if (data.length === 0){ return }
-      else if (data.length > 1){
-        $scope.eventsList = data
+      else if (data.length === 1){
+        $scope.showEvent = {"event": data[0]}
       }
       else{
-        $scope.showEvent = {"event": data[0]} // this is so hacky
+        $scope.showEvent = false
+        $scope.eventsList = data
       }
     }).error(function(data){
       console.log("error")
