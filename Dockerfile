@@ -24,4 +24,4 @@ WORKDIR /srv/
 
 RUN npm install
 
-CMD npm production
+CMD npm start
