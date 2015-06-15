@@ -1,0 +1,12 @@
+<div ng-scope="getEvents">
+  <h1>Events list</h1>
+
+  <ul class="list-group">
+    <a ng-repeat="event in eventsList" ng-click="getEvent(event._id)">
+      <li class="list-group-item">
+        <h3>{!{event.title}}</h3>
+        <p class="lead">{!{event.from}} &nbsp <strong>--</strong> &nbsp {!{event.to}}</p>
+      </li>
+    </a>
+  </ul>
+</div>

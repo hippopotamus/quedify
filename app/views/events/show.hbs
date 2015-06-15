@@ -1,0 +1,20 @@
+<div ng-show="showEvent">
+  <div ng-repeat="event in showEvent"> {{!-- this hack is embarassing --}}
+    <h3><strong>{!{event.title}}</strong></h3>
+    <p class="lead">{!{event.from}} &nbsp <strong>--</strong> &nbsp {!{event.to}}</p>
+    <p class="lead"><strong>location:</strong> {!{event.location}}</p>
+    <p class="lead"><strong>description:</strong> {!{event.description}}</p>
+    <p class="lead"><strong>Participants:</strong> {!{event.participants}}</p>
+    <div class="row">
+        <div class="col-sm-2">
+
+        <button class="btn btn-primary" ng-click="editEvent(event._id)">edit</button>
+        </div>
+        <div class="col-sm-offset-8 col-sm-2">
+
+        <button class="btn" ng-click="deleteEvent(event._id)" type="submit">delete</button>
+        </div>
+    </div>
+
+  </div>
+</div>
